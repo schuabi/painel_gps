@@ -1,0 +1,30 @@
+﻿Linha;Núcleo;Tipo Linha;Nome_Linha
+100;Central;Linha;TRO1
+105;Central;Linha;TRO5
+108;Gentileza;Linha;TRO6
+110;Gentileza;Linha;110
+112;Gentileza;Linha;112
+181;Central;Serviço;181
+309;Central;Linha;309
+315;Central;Linha;315
+440;São Cristóvão;Serviço;440
+443;São Cristóvão;Serviço;443
+444;Gentileza;Serviço;444
+460;São Cristóvão;Linha;460
+462;São Cristóvão;Serviço;462
+463;São Cristóvão;Linha;463
+472;São Cristóvão;Linha;472
+538;Central;Linha;538
+553;Central;Linha;INT8
+955;Central;Serviço;955
+957;Central;Serviço;957
+SN309;Central;Linha;SN309
+SN538;Central;Linha;SN538
+SP309;Central;Serviço;SP309
+SP315;Central;Serviço;SP315
+SP553;Central;Serviço;SPINT8
+163;Gentileza;Linha;163
+SV112;Gentileza;Linha;SV112
+222;Gentileza;Linha;222
+585;Gentileza;Linha;585
+LECD110;Gentileza;Linha;LECD110
