@@ -197,7 +197,7 @@ df_merged = pd.merge(
 st.set_page_config(page_title='Partidas GPS', layout='wide')
 
 # ✅ Dados de última modificação
-file_path = r'C:\dashboard_onibus\dados\dados_gps.csv'
+file_path = r'dados\dados_gps.csv'
 if os.path.exists(file_path):
     timestamp_modificacao = os.path.getmtime(file_path)
     ultima_modificacao = datetime.datetime.fromtimestamp(timestamp_modificacao)
