@@ -2,5 +2,5 @@ pandas
 datetime
 plotly.express
 streamlit
-matplotlib.pyplot
+matplotlib
 os
