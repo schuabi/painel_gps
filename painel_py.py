@@ -9,10 +9,10 @@ import os
 # In[45]:
 
 
-gps_nucleo = pd.read_csv("C:/dashboard_onibus//dados/dados_gps.csv", sep=";")
-faixas = pd.read_csv("C:/dashboard_onibus/dados/faixas_horarias.csv", sep=";")
-linhas = pd.read_csv("C:/dashboard_onibus/dados/linhas_e_nucleos.csv", sep=";")
-programacao = pd.read_csv("C://dashboard_onibus/dados/programacao_partidas.csv", sep=";")
+gps_nucleo = pd.read_csv("dados/dados_gps.csv", sep=";")
+faixas = pd.read_csv("dados/faixas_horarias.csv", sep=";")
+linhas = pd.read_csv("dados/linhas_e_nucleos.csv", sep=";")
+programacao = pd.read_csv("dados/programacao_partidas.csv", sep=";")
 
 
 # In[46]:
