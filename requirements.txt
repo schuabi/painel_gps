@@ -1,6 +1,4 @@
-pandas
-datetime
-plotly.express
 streamlit
+pandas
+plotly
 matplotlib
-os
