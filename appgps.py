@@ -74,7 +74,18 @@ df_merged['Execucao_num'] = df_merged['% Execução'] / 100
 df_merged['cor'] = df_merged['Execucao_num'].apply(lambda x: 'green' if x >= 0.8 else 'red')
 
 # ✅ Configuração inicial Streamlit
+
 st.set_page_config(page_title='Partidas GPS', layout='wide')
+
+# ✅ Filtro por Núcleo
+nucleos_disponiveis = df_merged['Núcleo'].unique().tolist()
+nucleo_selecionado = st.sidebar.radio(
+    'Selecione o Núcleo:',
+    options=nucleos_disponiveis
+)
+
+
+st.title(f'% de Partidas {nucleo_selecionado}')
 
 # ✅ Hora de última atualização
 file_path = r'dados/dados_gps.csv'
@@ -94,15 +105,6 @@ if os.path.exists(file_path):
 else:
     st.error('Arquivo dados.csv não encontrado no caminho especificado!')
 
-
-# ✅ Filtro por Núcleo
-nucleos_disponiveis = df_merged['Núcleo'].unique().tolist()
-nucleo_selecionado = st.sidebar.radio(
-    'Selecione o Núcleo:',
-    options=nucleos_disponiveis
-)
-
-st.title(f'% de Partidas {nucleo_selecionado}')
 
 # ✅ Função para gerar gráfico com Plotly
 def plot_faixa_plotly(df, faixa_nome):
