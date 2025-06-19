@@ -222,7 +222,7 @@ nucleo_selecionado = st.sidebar.radio(
     options=nucleos_disponiveis
 )
 
-st.write(f'% de Partidas Executadas por Faixa Horária - Núcleo: {nucleo_selecionado}')
+st.title(f'% de Partidas {nucleo_selecionado}')
 
 # ✅ Preparação dos dados
 df_merged['Execucao_num'] = df_merged['% Execução'] / 100
