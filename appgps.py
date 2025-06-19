@@ -77,7 +77,7 @@ def app():
 
     # ✅ Configuração inicial Streamlit
 
-    st.set_page_config(page_title='Partidas GPS Real', layout='wide')
+    #st.set_page_config(page_title='Partidas GPS Real', layout='wide')
 
     # ✅ Filtro por Núcleo
     nucleos_disponiveis = df_merged['Núcleo'].unique().tolist()
