@@ -4,6 +4,7 @@ import datetime
 import streamlit as st
 import matplotlib.pyplot as plt
 import os
+import pytz
 
 
 # In[45]:
@@ -196,15 +197,23 @@ df_merged = pd.merge(
 # ✅ Configuração inicial Streamlit
 st.set_page_config(page_title='Partidas GPS', layout='wide')
 
+import pytz
+
 # ✅ Dados de última modificação
 file_path = r'dados/dados_gps.csv'
 if os.path.exists(file_path):
     timestamp_modificacao = os.path.getmtime(file_path)
-    ultima_modificacao = datetime.datetime.fromtimestamp(timestamp_modificacao)
-    hora_minuto = ultima_modificacao.strftime('%H:%M')
+    
+    # Corrigir para horário do Rio de Janeiro
+    utc_time = datetime.datetime.utcfromtimestamp(timestamp_modificacao)
+    fuso_rio = pytz.timezone('America/Sao_Paulo')
+    hora_local = utc_time.replace(tzinfo=pytz.utc).astimezone(fuso_rio)
+    
+    hora_minuto = hora_local.strftime('%H:%M')
     st.info(f'Dados atualizados às: {hora_minuto}')
 else:
     st.error('Arquivo dados.csv não encontrado no caminho especificado!')
+
 
 # ✅ Filtro por Núcleo (radio button - único)
 nucleos_disponiveis = df_merged['Núcleo'].unique().tolist()
