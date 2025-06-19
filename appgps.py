@@ -11,17 +11,17 @@ faixas = pd.read_csv("dados/faixas_horarias.csv", sep=";")
 linhas = pd.read_csv("dados/linhas_e_nucleos.csv", sep=";")
 programacao = pd.read_csv("dados/programacao_partidas.csv", sep=";")
 
-# ✅ Limpeza e tratamento
+# ✅ Limpeza inicial
 del gps_nucleo['Linha Informada a SMTR']
 del gps_nucleo['Linha Realizada pela SMTR']
 del gps_nucleo['Veículo Consolidado pela SMTR']
-del gps_nucleo ['Início da Viagem pela SMTR']
-del gps_nucleo ['Término da Viagem pela SMTR']
-del gps_nucleo ['Viagem Reconhecida']
+del gps_nucleo['Início da Viagem pela SMTR']
+del gps_nucleo['Término da Viagem pela SMTR']
+del gps_nucleo['Viagem Reconhecida']
 
 gps_nucleo = pd.merge(gps_nucleo, linhas, on="Linha", how="left")
-del gps_nucleo ['Tipo Linha']
-del gps_nucleo ['Nome_Linha']
+del gps_nucleo['Tipo Linha']
+del gps_nucleo['Nome_Linha']
 
 gps_nucleo['Início da Viagem'] = pd.to_datetime(gps_nucleo['Início da Viagem'], dayfirst=True)
 gps_nucleo['Término da Viagem'] = pd.to_datetime(gps_nucleo['Término da Viagem'], format='%d/%m/%Y %H:%M:%S', errors='coerce')
@@ -40,13 +40,12 @@ resultado = resultado[['Início da Viagem', 'Faixa_Horaria']]
 gps_nucleo = gps_nucleo.merge(resultado, on='Início da Viagem', how='left')
 gps_nucleo = gps_nucleo.drop_duplicates()
 
-partidas_executadas = gps_nucleo.groupby(['Linha', 'Faixa_Horaria']).size().reset_index(name='Total_Partidas')
+partidas_executadas = gps_nucleo.groupby(['Linha', 'Faixa_Horaria']).size().reset_index(name='Executado')
 partidas_executadas = partidas_executadas.sort_values(by=['Linha', 'Faixa_Horaria'])
 
 programacao.columns = programacao.columns.str.strip()
 partidas_executadas.columns = partidas_executadas.columns.str.strip()
 
-partidas_executadas = partidas_executadas.rename(columns={'Total_Partidas': 'Executado'})
 programacao = programacao.rename(columns={'Faixa': 'Faixa_Horaria', 'linha': 'Linha'})
 
 comparativo = pd.merge(
@@ -70,10 +69,14 @@ df_merged = pd.merge(
     how='left'
 )
 
-# ✅ Configuração Streamlit
+# ✅ Preparar colunas para Plotly
+df_merged['Execucao_num'] = df_merged['% Execução'] / 100
+df_merged['cor'] = df_merged['Execucao_num'].apply(lambda x: 'green' if x >= 0.8 else 'red')
+
+# ✅ Configuração inicial Streamlit
 st.set_page_config(page_title='Partidas GPS', layout='wide')
 
-# ✅ Hora de atualização
+# ✅ Hora de última atualização
 file_path = r'dados/dados_gps.csv'
 if os.path.exists(file_path):
     timestamp_modificacao = os.path.getmtime(file_path)
@@ -94,36 +97,37 @@ nucleo_selecionado = st.sidebar.radio(
 
 st.title(f'% de Partidas {nucleo_selecionado}')
 
-# ✅ Prepara coluna para colorir as barras
-df_merged['Execucao_num'] = df_merged['% Execução'] / 100
-
-def cor_personalizada(valor):
-    return 'green' if valor >= 0.8 else 'red'
-
-df_merged['cor'] = df_merged['Execucao_num'].apply(cor_personalizada)
-
-# ✅ Função para gráfico Plotly
+# ✅ Função para gerar gráfico com Plotly
 def plot_faixa_plotly(df, faixa_nome):
     fig = px.bar(
         df,
         x='Linha',
-        y='% Execução',
+        y='Execucao_num',
         color='cor',
         color_discrete_map={'green': 'green', 'red': 'red'},
-        text='% Execução',
-        hover_data=['Executado', 'Programado'],
+        text=df['Execucao_num'].apply(lambda x: f'{x*100:.1f}%'),
+        hover_data={
+            'Linha': True,
+            'Executado': True,
+            'Programado': True,
+            '% Execução': True,
+            'cor': False,
+            'Execucao_num': False
+        },
         title=f'Faixa {faixa_nome}',
-        labels={'% Execução': '% Execução', 'Linha': 'Linha'}
     )
 
-    fig.update_traces(texttemplate='%{text:.1f}%', textposition='outside')
     fig.update_layout(
-        xaxis_tickangle=-45,
+        yaxis_title='',
+        xaxis_title='',
+        xaxis_type='category',
         height=400,
         margin=dict(l=20, r=20, t=40, b=20),
         showlegend=False,
-        yaxis_title='% Execução'
+        bargap=0.1
     )
+
+    fig.update_traces(textposition='outside')
 
     return fig
 
@@ -139,7 +143,7 @@ faixas_horarias = [
     ('21-00', '21h às 00h'),
 ]
 
-# ✅ Exibir gráficos em blocos de 4 colunas
+# ✅ Exibição dos gráficos
 for i in range(0, len(faixas_horarias), 4):
     cols = st.columns(4)
     for idx, (faixa_codigo, faixa_label) in enumerate(faixas_horarias[i:i+4]):
