@@ -120,8 +120,8 @@ def app():
             text=df['Execucao_num'].apply(lambda x: f'{x*100:.1f}%'),
             hover_data={
                 'Linha': True,
-                'Executado': True,
                 'Programado': True,
+                'Executado': True,
                 '% Execução': True,
                 'cor': False,
                 #'text': False,
