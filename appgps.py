@@ -75,7 +75,7 @@ df_merged['cor'] = df_merged['Execucao_num'].apply(lambda x: 'green' if x >= 0.8
 
 # ✅ Configuração inicial Streamlit
 
-st.set_page_config(page_title='Partidas GPS', layout='wide')
+st.set_page_config(page_title='Acompanhamento Partidas GPS Real', layout='wide')
 
 # ✅ Filtro por Núcleo
 nucleos_disponiveis = df_merged['Núcleo'].unique().tolist()
@@ -104,6 +104,7 @@ if os.path.exists(file_path):
     """, unsafe_allow_html=True)
 else:
     st.error('Arquivo dados.csv não encontrado no caminho especificado!')
+
 
 
 # ✅ Função para gerar gráfico com Plotly
