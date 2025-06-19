@@ -5,6 +5,8 @@ import os
 import pytz
 import plotly.express as px
 
+def app():
+
 # ✅ Leitura dos dados
 gps_nucleo = pd.read_csv("dados/dados_gps.csv", sep=";")
 faixas = pd.read_csv("dados/faixas_horarias.csv", sep=";")
