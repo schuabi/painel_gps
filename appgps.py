@@ -84,7 +84,7 @@ if os.path.exists(file_path):
     fuso_rio = pytz.timezone('America/Sao_Paulo')
     hora_local = utc_time.replace(tzinfo=pytz.utc).astimezone(fuso_rio)
     hora_minuto = hora_local.strftime('%H:%M')
-    st.info(f'Dados atualizados às: {hora_minuto}')
+    st.write(f'Dados atualizados às: {hora_minuto}')
 else:
     st.error('Arquivo dados.csv não encontrado no caminho especificado!')
 
@@ -112,6 +112,7 @@ def plot_faixa_plotly(df, faixa_nome):
             'Programado': True,
             '% Execução': True,
             'cor': False,
+            #'text': False,
             'Execucao_num': False
         },
         title=f'Faixa {faixa_nome}',
