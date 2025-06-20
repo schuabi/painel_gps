@@ -5,6 +5,16 @@ import os
 import pytz
 import plotly.express as px
 
+st.markdown("""
+    <style>
+    /* Reduz o espaçamento padrão que o Streamlit aplica no container principal */
+    .block-container {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 def app():
     # ✅ Leitura dos dados
     gps_nucleo = pd.read_csv("dados/dados_gps.csv", sep=";")
