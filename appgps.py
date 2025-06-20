@@ -81,12 +81,24 @@ def app():
         options=nucleos_disponiveis
     )
 
-    # ✅ TÍTULO CUSTOMIZADO NO TOPO (Logo após seleção do núcleo)
     st.markdown(f"""
-        <div style='background-color: #f0f2f6; padding: 10px 20px; margin-bottom:10px; margin-top: -25px;'>
-            <h2 style='margin: 0; color: #31333F;'>% de Partidas Executadas {nucleo_selecionado}</h2>
+    <div style='
+        background-color: #f0f2f6;
+        padding: 10px 20px;
+        margin-bottom: 10px;
+        margin-top: -25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    '>
+        <h2 style='margin: 0; color: #31333F;'>% de Partidas Executadas {nucleo_selecionado}</h2>
+        <div style='text-align: right;'>
+            <span style='font-size: 14px; font-weight: bold;'>Última atualização</span><br>
+            <span style='font-size: 16px; font-weight: bold;'>{hora_minuto}</span>
         </div>
-    """, unsafe_allow_html=True)
+    </div>
+""", unsafe_allow_html=True)
+
 
     # ✅ Hora de última atualização
     file_path = r'dados/dados_gps.csv'
