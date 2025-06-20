@@ -5,7 +5,13 @@ import os
 import pytz
 import plotly.express as px
 
+
+
+
+#st.set_page_config(page_title='Partidas GPS Real', layout='wide', initial_sidebar_state='expanded')
+
 def app():
+
     # ✅ Leitura dos dados
     gps_nucleo = pd.read_csv("dados/dados_gps.csv", sep=";")
     faixas = pd.read_csv("dados/faixas_horarias.csv", sep=";")
@@ -74,6 +80,10 @@ def app():
     df_merged['Execucao_num'] = df_merged['% Execução'] / 100
     df_merged['cor'] = df_merged['Execucao_num'].apply(lambda x: 'green' if x >= 0.8 else 'red')
 
+    # ✅ Configuração inicial Streamlit
+
+    #st.set_page_config(page_title='Partidas GPS Real', layout='wide')
+
     # ✅ Filtro por Núcleo
     nucleos_disponiveis = df_merged['Núcleo'].unique().tolist()
     nucleo_selecionado = st.sidebar.radio(
@@ -81,12 +91,8 @@ def app():
         options=nucleos_disponiveis
     )
 
-    # ✅ TÍTULO CUSTOMIZADO NO TOPO (Logo após seleção do núcleo)
-    st.markdown(f"""
-        <div style='background-color: #f0f2f6; padding: 10px 20px; margin-bottom:10px; margin-top: -25px;'>
-            <h2 style='margin: 0; color: #31333F;'>% de Partidas Executadas {nucleo_selecionado}</h2>
-        </div>
-    """, unsafe_allow_html=True)
+
+    st.title(f'% de Partidas Executadas {nucleo_selecionado}')
 
     # ✅ Hora de última atualização
     file_path = r'dados/dados_gps.csv'
@@ -106,6 +112,8 @@ def app():
     else:
         st.error('Arquivo dados.csv não encontrado no caminho especificado!')
 
+
+
     # ✅ Função para gerar gráfico com Plotly
     def plot_faixa_plotly(df, faixa_nome):
         fig = px.bar(
@@ -121,6 +129,7 @@ def app():
                 'Executado': True,
                 '% Execução': True,
                 'cor': False,
+                #'text': False,
                 'Execucao_num': False
             },
             title=f'Faixa {faixa_nome}',
@@ -137,6 +146,7 @@ def app():
         )
 
         fig.update_traces(textposition='outside')
+
         return fig
 
     # ✅ Lista das faixas
