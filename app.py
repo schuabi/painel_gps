@@ -5,8 +5,8 @@ from programacao import app as programacao_app
 
 st.markdown("""
     <style>
-    /* Ocultar o botão de Share */
-    button[title="Share"] {
+    /* Ocultar os botões de ações do header (ex: Share, Config) */
+    div[data-testid="stToolbarActions"] {
         display: none !important;
     }
 
@@ -15,12 +15,13 @@ st.markdown("""
         visibility: hidden;
     }
 
-    /* Ocultar o rodapé (opcional) */
+    /* Ocultar o rodapé */
     footer {
         visibility: hidden;
     }
     </style>
 """, unsafe_allow_html=True)
+
 
 
 
