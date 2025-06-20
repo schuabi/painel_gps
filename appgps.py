@@ -6,33 +6,7 @@ import pytz
 import plotly.express as px
 
 
-# --- Inicializa controle de estado ---
-if 'sidebar_state' not in st.session_state:
-    st.session_state.sidebar_state = 'expanded'
 
-# --- Alterna o estado da sidebar ---
-def toggle_sidebar():
-    if st.session_state.sidebar_state == 'expanded':
-        st.session_state.sidebar_state = 'collapsed'
-    else:
-        st.session_state.sidebar_state = 'expanded'
-    st.experimental_rerun()
-
-# --- Aplica configuração da página ---
-st.set_page_config(
-    page_title='Dashboard GPS',
-    layout='wide',
-    initial_sidebar_state=st.session_state.sidebar_state
-)
-
-# --- Botão custom de abrir/fechar sidebar ---
-st.markdown("""
-    <style>
-    header.stAppHeader { display: none; }
-    </style>
-""", unsafe_allow_html=True)
-
-st.button("Mostrar / Ocultar Sidebar", on_click=toggle_sidebar)
 
 #st.set_page_config(page_title='Partidas GPS Real', layout='wide', initial_sidebar_state='expanded')
 
