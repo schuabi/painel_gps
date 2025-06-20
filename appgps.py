@@ -171,7 +171,7 @@ def app():
     ]
 
     # ✅ Exibição dos gráficos
-    for i in range(0, len(faixas_horarias), 4):
+    for i in range(0, len(faixas_horarias, nucleo_selecionado), 4):
         cols = st.columns(4)
         for idx, (faixa_codigo, faixa_label) in enumerate(faixas_horarias[i:i+4]):
             with cols[idx]:
