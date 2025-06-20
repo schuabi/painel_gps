@@ -90,12 +90,7 @@ def app():
         hora_local = utc_time.replace(tzinfo=pytz.utc).astimezone(fuso_rio)
         hora_minuto = hora_local.strftime('%H:%M')
 
-        st.markdown(f"""
-        <div style='text-align:left; padding:8px 0;'>
-            <span style='font-size:16px; font-weight:bold;'>Última atualização</span><br>
-            <span style='font-size:20px; font-weight:bold;'>{hora_minuto}</span>
-        </div>
-        """, unsafe_allow_html=True)
+        
     else:
         st.error('Arquivo dados.csv não encontrado no caminho especificado!')
 
