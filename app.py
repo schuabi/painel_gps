@@ -3,6 +3,14 @@ from appgps import app as appgps_app
 from partidas import app as partidas_app
 from programacao import app as programacao_app
 
+st.markdown("""
+    <style>
+    header.stAppHeader {
+        display: none;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 st.set_page_config(page_title='Dashboard GPS', layout='wide')
 
 # ✅ Inicializar o estado se ainda não existir
