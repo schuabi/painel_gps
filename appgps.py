@@ -122,26 +122,6 @@ def app():
     </div>
 """, unsafe_allow_html=True)
 
-# ✅ Criar o bloco de título com última atualização alinhada à direita
-st.markdown(f"""
-    <div style="
-        background-color: #f0f2f6; 
-        padding: 10px 20px; 
-        display: flex; 
-        justify-content: space-between; 
-        align-items: center; 
-        margin-top: -40px;
-        margin-bottom: 10px;
-    ">
-        <div style="font-size: 1.75rem; font-weight: 600;">
-            % de Partidas Executadas {nucleo_selecionado}
-        </div>
-        <div style="text-align: right;">
-            <div style="font-size: 0.85rem; font-weight: bold;">Última atualização</div>
-            <div style="font-size: 1rem; font-weight: bold;">{hora_minuto}</div>
-        </div>
-    </div>
-""", unsafe_allow_html=True)
 
     
 
