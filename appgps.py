@@ -9,8 +9,8 @@ st.markdown("""
     <style>
     /* Reduz o espaçamento padrão que o Streamlit aplica no container principal */
     .block-container {
-        padding-top: 0.4rem;
-        padding-bottom: 0.4rem;
+        padding-top: 0.3rem;
+        padding-bottom: 0.3rem;
     }
     </style>
 """, unsafe_allow_html=True)
