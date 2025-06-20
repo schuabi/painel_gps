@@ -11,7 +11,9 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.set_page_config(page_title='Dashboard GPS', layout='wide')
+
+
+#st.set_page_config(page_title='Dashboard GPS', layout='wide')
 
 # ✅ Inicializar o estado se ainda não existir
 if "pagina" not in st.session_state:
