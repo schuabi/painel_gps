@@ -6,7 +6,7 @@ import pytz
 import plotly.express as px
 
 
-st.set_page_config(page_title='Partidas GPS Real', layout='wide', initial_sidebar_state='expanded')
+#st.set_page_config(page_title='Partidas GPS Real', layout='wide', initial_sidebar_state='expanded')
 
 def app():
 

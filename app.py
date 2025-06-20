@@ -13,7 +13,7 @@ st.markdown("""
 
 
 
-#st.set_page_config(page_title='Dashboard GPS', layout='wide')
+st.set_page_config(page_title='Dashboard GPS', layout='wide', initial_sidebar_state='expanded')
 
 # ✅ Inicializar o estado se ainda não existir
 if "pagina" not in st.session_state:
