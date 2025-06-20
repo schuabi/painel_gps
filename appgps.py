@@ -5,6 +5,15 @@ import os
 import pytz
 import plotly.express as px
 
+st.markdown("""
+    <style>
+    header.stAppHeader {
+        display: none;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+
 def app():
 
     # ✅ Leitura dos dados
