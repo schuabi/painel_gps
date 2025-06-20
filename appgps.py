@@ -81,6 +81,24 @@ def app():
         options=nucleos_disponiveis
     )
 
+    # ✅ Hora de última atualização
+    file_path = r'dados/dados_gps.csv'
+    if os.path.exists(file_path):
+        timestamp_modificacao = os.path.getmtime(file_path)
+        utc_time = datetime.datetime.utcfromtimestamp(timestamp_modificacao)
+        fuso_rio = pytz.timezone('America/Sao_Paulo')
+        hora_local = utc_time.replace(tzinfo=pytz.utc).astimezone(fuso_rio)
+        hora_minuto = hora_local.strftime('%H:%M')
+
+        st.markdown(f"""
+        <div style='text-align:left; padding:8px 0;'>
+            <span style='font-size:16px; font-weight:bold;'>Última atualização</span><br>
+            <span style='font-size:20px; font-weight:bold;'>{hora_minuto}</span>
+        </div>
+        """, unsafe_allow_html=True)
+    else:
+        st.error('Arquivo dados.csv não encontrado no caminho especificado!')
+
     st.markdown(f"""
     <div style='
         background-color: #f0f2f6;
@@ -100,23 +118,7 @@ def app():
 """, unsafe_allow_html=True)
 
 
-    # ✅ Hora de última atualização
-    file_path = r'dados/dados_gps.csv'
-    if os.path.exists(file_path):
-        timestamp_modificacao = os.path.getmtime(file_path)
-        utc_time = datetime.datetime.utcfromtimestamp(timestamp_modificacao)
-        fuso_rio = pytz.timezone('America/Sao_Paulo')
-        hora_local = utc_time.replace(tzinfo=pytz.utc).astimezone(fuso_rio)
-        hora_minuto = hora_local.strftime('%H:%M')
-
-        st.markdown(f"""
-        <div style='text-align:left; padding:8px 0;'>
-            <span style='font-size:16px; font-weight:bold;'>Última atualização</span><br>
-            <span style='font-size:20px; font-weight:bold;'>{hora_minuto}</span>
-        </div>
-        """, unsafe_allow_html=True)
-    else:
-        st.error('Arquivo dados.csv não encontrado no caminho especificado!')
+    
 
     # ✅ Função para gerar gráfico com Plotly
     def plot_faixa_plotly(df, faixa_nome):
