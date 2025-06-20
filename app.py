@@ -3,33 +3,24 @@ from appgps import app as appgps_app
 from partidas import app as partidas_app
 from programacao import app as programacao_app
 
-# --- Inicializa controle de estado ---
-if 'sidebar_state' not in st.session_state:
-    st.session_state.sidebar_state = 'expanded'
-
-# --- Alterna o estado da sidebar ---
-def toggle_sidebar():
-    if st.session_state.sidebar_state == 'expanded':
-        st.session_state.sidebar_state = 'collapsed'
-    else:
-        st.session_state.sidebar_state = 'expanded'
-    st.experimental_rerun()
-
-# --- Aplica configuração da página ---
-st.set_page_config(
-    page_title='Dashboard GPS',
-    layout='wide',
-    initial_sidebar_state=st.session_state.sidebar_state
-)
-
-# --- Botão custom de abrir/fechar sidebar ---
 st.markdown("""
     <style>
-    header.stAppHeader { display: none; }
+    /* Ocultar o botão de Share */
+    button[title="Share"] {
+        display: none !important;
+    }
+
+    /* Ocultar o Menu (três pontinhos) */
+    #MainMenu {
+        visibility: hidden;
+    }
+
+    /* Ocultar o rodapé (opcional) */
+    footer {
+        visibility: hidden;
+    }
     </style>
 """, unsafe_allow_html=True)
-
-st.button("Mostrar / Ocultar Sidebar", on_click=toggle_sidebar)
 
 
 
