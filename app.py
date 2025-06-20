@@ -3,13 +3,27 @@ from appgps import app as appgps_app
 from partidas import app as partidas_app
 from programacao import app as programacao_app
 
+import streamlit as st
+
 st.markdown("""
     <style>
-    header.stAppHeader {
-        display: none;
+    /* Ocultar o botão de Share */
+    button[title="Share"] {
+        display: none !important;
+    }
+
+    /* Ocultar o Menu (três pontinhos) */
+    #MainMenu {
+        visibility: hidden;
+    }
+
+    /* Ocultar o rodapé (opcional) */
+    footer {
+        visibility: hidden;
     }
     </style>
 """, unsafe_allow_html=True)
+
 
 
 
