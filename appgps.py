@@ -5,6 +5,7 @@ import os
 import pytz
 import plotly.express as px
 
+
 st.markdown("""
     <style>
     /* Reduz o espaçamento padrão que o Streamlit aplica no container principal */

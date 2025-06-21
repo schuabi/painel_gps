@@ -2,6 +2,8 @@ import streamlit as st
 from appgps import app as appgps_app
 from partidas import app as partidas_app
 from programacao import app as programacao_app
+import threading
+import time
 
 st.markdown("""
     <style>
@@ -24,7 +26,14 @@ st.markdown("""
 
 
 
+# ✅ Configurar Auto-Refresh a cada 5 minutos
+def auto_refresh(interval=300):
+    def refresh():
+        time.sleep(interval)
+        st.experimental_rerun()
+    threading.Thread(target=refresh, daemon=True).start()
 
+auto_refresh()
 
 st.set_page_config(page_title='Dashboard GPS', layout='wide', initial_sidebar_state='expanded')
 
