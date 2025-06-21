@@ -123,7 +123,18 @@ def app():
 """, unsafe_allow_html=True)
 
 
-    
+    # ✅ Configurar Auto-Refresh a cada 5 minutos
+def auto_refresh(interval=300):
+    def refresh():
+        time.sleep(interval)
+        st.experimental_rerun()
+    threading.Thread(target=refresh, daemon=True).start()
+
+auto_refresh()
+
+
+
+
 
     # ✅ Função para gerar gráfico com Plotly
     def plot_faixa_plotly(df, faixa_nome):
