@@ -5,6 +5,8 @@ from programacao import app as programacao_app
 import threading
 import time
 
+
+
 st.markdown("""
     <style>
     /* Ocultar os botões de ações do header (ex: Share, Config) */
@@ -26,14 +28,6 @@ st.markdown("""
 
 
 
-# ✅ Configurar Auto-Refresh a cada 5 minutos
-def auto_refresh(interval=300):
-    def refresh():
-        time.sleep(interval)
-        st.experimental_rerun()
-    threading.Thread(target=refresh, daemon=True).start()
-
-auto_refresh()
 
 st.set_page_config(page_title='Dashboard GPS', layout='wide', initial_sidebar_state='expanded')
 
