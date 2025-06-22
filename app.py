@@ -31,6 +31,15 @@ st.markdown("""
 
 st.set_page_config(page_title='Dashboard GPS', layout='wide', initial_sidebar_state='expanded')
 
+# ✅ Configurar Auto-Refresh a cada 5 minutos
+def auto_refresh(interval=300):
+    def refresh():
+        time.sleep(interval)
+        st.experimental_rerun()
+    threading.Thread(target=refresh, daemon=True).start()
+
+auto_refresh()
+
 # ✅ Inicializar o estado se ainda não existir
 if "pagina" not in st.session_state:
     st.session_state.pagina = "Gráficos"
